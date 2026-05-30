@@ -1,59 +1,54 @@
-// =====================================
-// PORTFOLIO DIDÁCTICA II (ACTUALIZADO)
-// =====================================
 
+/* =====================================
+   ELEMENTOS
+===================================== */
 
-// =====================================
-// ELEMENTOS
-// =====================================
-
-const taskWrapper = document.getElementById("actividades-wrapper");
+const taskButtons = document.querySelectorAll(".actividad-button");
 
 const contentWrapper = document.getElementById("content-wrapper");
-
 const contentFrame = document.getElementById("content-frame");
 
 const sectionTitle = document.getElementById("section-title");
 
 const backButtonContainer = document.getElementById("back-button-container");
-
 const backButton = document.getElementById("back-to-list");
 
-const taskButtons = document.querySelectorAll(".actividad-button");
+const actividadesWrapper = document.getElementById("actividades-wrapper");
 
 const navbar = document.querySelector(".navbar");
-
 const clock = document.getElementById("live-clock");
 
 
-// =====================================
-// ABRIR ACTIVIDAD (CLICK EN TARJETA)
-// =====================================
+/* =====================================
+   ABRIR ACTIVIDAD
+===================================== */
 
 taskButtons.forEach((button) => {
 
     button.addEventListener("click", (e) => {
-
-        // evitar que el click en el botón lateral dispare el visor
-        if (e.target.closest(".activity-side-button")) return;
 
         e.preventDefault();
 
         const title = button.dataset.title;
         const link = button.dataset.link;
 
+        // cambiar título
         sectionTitle.textContent = title;
 
-        taskWrapper.classList.add("fade-out");
+        // ocultar lista
+        actividadesWrapper.classList.add("fade-out");
 
         setTimeout(() => {
 
-            taskWrapper.classList.add("hidden");
+            actividadesWrapper.classList.add("hidden");
 
+            // reset iframe
             contentFrame.src = "";
 
-            contentWrapper.classList.remove("hidden", "fade-out", "show");
+            // mostrar visor
+            contentWrapper.classList.remove("hidden", "fade-out");
 
+            // reflow
             void contentWrapper.offsetHeight;
 
             requestAnimationFrame(() => {
@@ -73,31 +68,29 @@ taskButtons.forEach((button) => {
 });
 
 
-// =====================================
-// VOLVER AL LISTADO
-// =====================================
+/* =====================================
+   VOLVER
+===================================== */
 
 function goBack() {
 
     contentWrapper.classList.remove("show");
-
     contentWrapper.classList.add("fade-out");
 
     setTimeout(() => {
 
         contentFrame.src = "";
 
+        contentWrapper.classList.add("hidden");
         contentWrapper.classList.remove("fade-out");
 
-        contentWrapper.classList.add("hidden");
+        actividadesWrapper.classList.remove("hidden", "fade-out");
 
-        taskWrapper.classList.remove("hidden", "fade-out", "show");
-
-        void taskWrapper.offsetHeight;
+        void actividadesWrapper.offsetHeight;
 
         requestAnimationFrame(() => {
 
-            taskWrapper.classList.add("show");
+            actividadesWrapper.classList.add("show");
 
             sectionTitle.textContent = "Actividades:";
 
@@ -109,17 +102,12 @@ function goBack() {
 
 }
 
-
-// =====================================
-// BOTÓN VOLVER
-// =====================================
-
 backButton.addEventListener("click", goBack);
 
 
-// =====================================
-// ESC PARA VOLVER
-// =====================================
+/* =====================================
+   ESC PARA VOLVER
+===================================== */
 
 document.addEventListener("keydown", (e) => {
 
@@ -133,30 +121,26 @@ document.addEventListener("keydown", (e) => {
 });
 
 
-// =====================================
-// ANIMACIÓN TARJETAS
-// =====================================
+/* =====================================
+   NAVBAR SCROLL
+===================================== */
 
-const cards = document.querySelectorAll(".project-card");
+window.addEventListener("scroll", () => {
 
-cards.forEach((card, index) => {
+    if (!navbar) return;
 
-    card.style.animationDelay = `${index * 0.08}s`;
-
-    card.addEventListener("mouseenter", () => {
-        card.style.transform = "translateY(-4px)";
-    });
-
-    card.addEventListener("mouseleave", () => {
-        card.style.transform = "translateY(0px)";
-    });
+    if (window.scrollY > 15) {
+        navbar.classList.add("scrolled");
+    } else {
+        navbar.classList.remove("scrolled");
+    }
 
 });
 
 
-// =====================================
-// RELOJ
-// =====================================
+/* =====================================
+   RELOJ
+===================================== */
 
 function updateClock() {
 
@@ -177,26 +161,9 @@ setInterval(updateClock, 1000);
 updateClock();
 
 
-// =====================================
-// NAVBAR SCROLL
-// =====================================
-
-window.addEventListener("scroll", () => {
-
-    if (!navbar) return;
-
-    if (window.scrollY > 15) {
-        navbar.classList.add("scrolled");
-    } else {
-        navbar.classList.remove("scrolled");
-    }
-
-});
-
-
-// =====================================
-// ANIMACIÓN DE ENTRADA
-// =====================================
+/* =====================================
+   ANIMACIÓN ENTRADA
+===================================== */
 
 window.addEventListener("load", () => {
 
