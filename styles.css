@@ -187,34 +187,13 @@ body{
 
 
 /* =========================================
-   TARJETAS
+   TARJETAS ACTIVIDADES
 ========================================= */
 
 .project-card{
     animation:fadeUp 0.8s ease forwards;
-
     opacity:0;
 }
-
-.task-button{
-    width:100%;
-
-    display:flex;
-
-    text-decoration:none;
-
-    overflow:hidden;
-
-    transition:0.35s ease;
-}
-
-.task-button:hover{
-    transform:translateY(-4px);
-}
-
-/* =========================================
-   ACTIVIDADES (NUEVA ESTRUCTURA)
-========================================= */
 
 .actividad-card{
     display:flex;
@@ -222,7 +201,7 @@ body{
     overflow:hidden;
 }
 
-/* bloque principal clickeable */
+/* botón principal */
 .actividad-button{
     flex:1;
     display:flex;
@@ -231,18 +210,16 @@ body{
     transition:0.35s ease;
 }
 
-/* hover general tarjeta */
 .actividad-button:hover{
     transform:translateY(-4px);
 }
 
-/* numero */
+/* número */
 .card-number{
     min-width:100px;
     height:100px;
 
     background:#12357a;
-
     color:white;
 
     display:flex;
@@ -265,7 +242,6 @@ body{
     height:100px;
 
     background:#f5f5f5;
-
     color:#173f91;
 
     display:flex;
@@ -287,6 +263,7 @@ body{
     line-height:1.2;
 }
 
+
 /* =========================================
    BOTÓN LATERAL (Drive / Canva)
 ========================================= */
@@ -296,9 +273,9 @@ body{
     min-width:130px;
 
     display:flex;
-    align-items:stretch;
 }
 
+/* MISMA ANIMACIÓN QUE TARJETAS */
 .resource-button{
     width:100%;
     height:100%;
@@ -315,12 +292,33 @@ body{
     font-weight:700;
     font-size:1rem;
 
+    transition:0.35s ease;
+
+    position:relative;
+    overflow:hidden;
+}
+
+/* hover igual que actividad */
+.resource-button:hover{
+    transform:translateY(-4px);
+    background:#1749d1;
+}
+
+/* brillo suave */
+.resource-button::after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:rgba(255,255,255,0.08);
+    opacity:0;
     transition:0.3s ease;
 }
 
-.resource-button:hover{
-    background:#1749d1;
+.resource-button:hover::after{
+    opacity:1;
 }
+
 
 /* =========================================
    BOTÓN VOLVER
@@ -328,7 +326,6 @@ body{
 
 #back-button-container{
     position:fixed;
-
     top:95px;
     left:25px;
 
@@ -338,26 +335,21 @@ body{
     visibility:hidden;
 
     transform:translateY(-20px);
-
     transition:0.3s ease;
 }
 
 #back-button-container.visible{
     opacity:1;
     visibility:visible;
-
     transform:translateY(0);
 }
 
 #back-to-list{
     border:none;
-
     background:white;
-
     color:#173f91;
 
     padding:16px 24px;
-
     border-radius:50px;
 
     display:flex;
@@ -371,7 +363,6 @@ body{
     cursor:pointer;
 
     box-shadow:0 10px 25px rgba(0,0,0,0.2);
-
     transition:0.3s ease;
 }
 
@@ -389,21 +380,15 @@ body{
     width:100%;
 }
 
-#content-wrapper{
-    margin-top:0;
-}
-
 #content-wrapper.show{
     animation:fadeUp 0.45s ease;
 }
 
 .viewer-header{
     width:100%;
-
     padding:20px 25px;
 
     background:#173f91;
-
     color:white;
 
     font-size:1rem;
@@ -414,23 +399,18 @@ body{
 
 .iframe-container{
     width:100%;
-
     height:78vh;
 
     background:white;
 
     overflow:hidden;
-
     border-radius:0 0 10px 10px;
 }
 
 #content-frame{
     width:100%;
     height:100%;
-
     border:none;
-
-    display:block;
 }
 
 
@@ -440,10 +420,6 @@ body{
 
 .hidden{
     display:none;
-}
-
-.show{
-    display:block;
 }
 
 .fade-out{
@@ -456,36 +432,29 @@ body{
     overflow:hidden;
 }
 
+
 /* =========================================
    FONDO
 ========================================= */
 
 .background-shapes{
     position:fixed;
-
     inset:0;
 
     z-index:-1;
-
-    overflow:hidden;
-
     pointer-events:none;
 }
 
 .background-shapes span{
     position:absolute;
-
     border-radius:50%;
-
     background:rgba(255,255,255,0.04);
-
     animation:float 10s infinite ease-in-out;
 }
 
 .background-shapes span:nth-child(1){
     width:340px;
     height:340px;
-
     top:90px;
     left:-130px;
 }
@@ -493,7 +462,6 @@ body{
 .background-shapes span:nth-child(2){
     width:260px;
     height:260px;
-
     bottom:90px;
     right:-80px;
 }
@@ -501,7 +469,6 @@ body{
 .background-shapes span:nth-child(3){
     width:180px;
     height:180px;
-
     top:50%;
     left:45%;
 }
@@ -513,13 +480,9 @@ body{
 
 .footer{
     width:100%;
-
     padding:30px 20px;
-
     text-align:center;
-
     font-size:1rem;
-
     opacity:0.85;
 }
 
@@ -529,37 +492,19 @@ body{
 ========================================= */
 
 @keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
 }
 
 @keyframes fadeOut{
-    from{
-        opacity:1;
-        transform:translateY(0);
-    }
-    to{
-        opacity:0;
-        transform:translateY(15px);
-    }
+    from{opacity:1; transform:translateY(0);}
+    to{opacity:0; transform:translateY(15px);}
 }
 
 @keyframes float{
-    0%{
-        transform:translateY(0px);
-    }
-    50%{
-        transform:translateY(-25px);
-    }
-    100%{
-        transform:translateY(0px);
-    }
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-25px);}
+    100%{transform:translateY(0px);}
 }
 
 
@@ -573,43 +518,8 @@ body{
     }
 }
 
-@media(max-width:900px){
-    .hero h1{
-        font-size:3.5rem;
-    }
-
-    .section-header h2{
-        font-size:2.4rem;
-    }
-}
-
 @media(max-width:768px){
 
-    .navbar{
-        padding:0 20px;
-    }
-
-    .hero{
-        padding:80px 20px 35px;
-    }
-
-    .hero h1{
-        font-size:2.7rem;
-    }
-
-    .hero p{
-        font-size:1rem;
-    }
-
-    .portfolio-section{
-        padding:20px 10px 35px;
-    }
-
-    .section-header h2{
-        font-size:1.9rem;
-    }
-
-    /* tarjetas en columna */
     .actividad-card{
         flex-direction:column;
     }
@@ -624,6 +534,14 @@ body{
         border-top:1px solid rgba(255,255,255,0.15);
     }
 
+    .hero h1{
+        font-size:2.7rem;
+    }
+
+    .section-header h2{
+        font-size:1.9rem;
+    }
+
     .card-number{
         width:100%;
         height:80px;
@@ -633,24 +551,12 @@ body{
         height:auto;
         padding:22px 18px;
     }
-
-    .card-content h3{
-        font-size:1.25rem;
-    }
-
-    .iframe-container{
-        height:75vh;
-    }
 }
 
 @media(max-width:500px){
 
     .hero h1{
         font-size:2.2rem;
-    }
-
-    .hero-tag{
-        font-size:0.85rem;
     }
 
     .section-header h2{
@@ -661,9 +567,5 @@ body{
         flex-direction:column;
         gap:12px;
         text-align:center;
-    }
-
-    .card-content h3{
-        font-size:1.1rem;
     }
 }
